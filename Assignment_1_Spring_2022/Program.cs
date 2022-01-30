@@ -5,6 +5,9 @@ WRITE YOUR CODE IN THE RESPECTIVE FUNCTION BLOCK
 
 */
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace DIS_Assignmnet1_SPRING_2022
 {
@@ -89,9 +92,23 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
-                // write your code here
-                String final_string ="";
-                return final_string;
+                // create an array c that contains all the vowels
+                var c = new string[] { "a", "i", "o","e","u" };
+                 //decalre a empty string variable for the new string
+                String final_string = "";
+                //check the constraints of 0<=s.length<=10000
+                if (s.Length >= 0 && s.Length <= 10000)
+                {
+                // loop through c, replace the elelments of s with empty character if any element of c is found 
+                    foreach (var i in c)
+                    {
+                        final_string = s.Replace(i, string.Empty);
+                    }
+                    //return the new string 
+                    return final_string;
+                }
+
+                
             }
             catch (Exception)
             {
@@ -125,8 +142,16 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
-                // write your code here.
-                return false;
+                //var bulls_string1 = new string[] { "Marshall", "Student", "Center" };
+                //var bulls_string2 = new string[] { "MarshallStudent", "Center" };
+                // using string join method to join bulls_string1 & 2 together as two separete string separeted by ,
+                var t1 = string.Join("", bulls_string1);
+                var t2 = string.Join("", bulls_string2);
+                // using string compare to method to compare these two strings 
+                if (t1.CompareTo(t2) == 0)
+                    return true;
+                else
+                    return false;
             }
             catch (Exception)
             {
@@ -159,8 +184,20 @@ namespace DIS_Assignmnet1_SPRING_2022
             try
             {
                 // write your code here
-                return 0;
-
+               // var b = new int[] { 1, 2, 3, 4, 5 };
+                var a = new List<int>();
+                var sum = 0;
+                //loop through bull_bucks,find duplicate elements and remove it from the array
+                for (var i = 0; i < bull_bucks.Length; i++)
+                {
+                    for (var m = i + 1; m < bull_bucks.Length; m++)
+                        if (bull_bucks[i] == bull_bucks[m])
+                        { bull_bucks = bull_bucks.Where(e => e != bull_bucks[i]).ToArray(); }
+                }
+                //sum up all the elements 
+                foreach (var n in bull_bucks)
+                { sum += n; }
+                return sum;
             }
             catch (Exception)
             {
@@ -192,9 +229,24 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
-                // write your code here.
+               // var mat = new int[,] { { 5 } };
+                var p = 0;
+                var s = 0;
+                var ps = 0;
+                //get the sum of the primary diagonal
+                //get the sum of the secondary diagonal
+                for (var i = 0; i < bulls_grid.GetLength(0); i++)
+                {
 
-                return 0;
+                    p += bulls_grid[i, i];
+                    s += bulls_grid[i, bulls_grid.GetLength(0) - i - 1];
+                }
+                // if the length of first element of Bulls_grid is odd, need to deduct the element that we counted twice 
+                if (bulls_grid.Length % 2 != 0)
+                {
+                    p -= bulls_grid[(int)(bulls_grid.GetLength(0) / 2), (int)(bulls_grid.GetLength(0) / 2)];
+                }
+                return (p+s);
             }
             catch (Exception e)
             {
@@ -224,8 +276,25 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
-                // write your code here.
-                return "null";
+               // var s = "aaiougrt";
+                //var a = new int[] { 4, 0, 2, 6, 7, 3, 1, 5 };
+                //check if indices has a same length of bulls_String
+                if (indices.Length == bulls_string.Length)
+                {
+                    //create a empty array with a same length of bulls_string to store
+                    //bulls_string's element which are replaced according to the indice position
+                    var tmp = new char[bulls_string.Length];
+                    for (var i = 0; i < bulls_string.Length; i++)
+                    {
+                        var m = indices[i];
+                        tmp[m] = bulls_string[i];
+                    }
+                    //Console.WriteLine(string.Join("", tmp));
+                    //join tmp element together after being re-positioned 
+                    return string.Join("", tmp);
+                }
+
+                
             }
             catch (Exception e)
             {
@@ -264,8 +333,39 @@ namespace DIS_Assignmnet1_SPRING_2022
         {
             try
             {
-                String prefix_string ="";
-                return prefix_string;
+                //var s = "mumacollegeofbusiness";
+                // var ch = 'c';
+                //create a empty string to store the final string 
+                String prefix_string = "";
+                //check if inpute string contains ch
+                if (bulls_string6.Contains(ch))
+                {
+                    //if the inpute string contains ch,return the index position 
+                    var i = bulls_string6.IndexOf(ch);
+                    Console.WriteLine(i);
+                    // store the substring of index(0,i+1)
+                    var sc1 = bulls_string6.Substring(0, i + 1);
+                    //store the substring of the rest of the input string
+                    var sc2 = bulls_string6.Substring(i + 2);
+                    //use a stringbuilder to reverse the first substring
+                    var c = new StringBuilder();
+                    for (var m = i; m >= 0; m--)
+                    {
+                        c.Append(sc1[m]);
+                    }
+                    //convert the stringbuilder to a string 
+                    var sc3 = c.ToString();
+                    //concanitate the reversed string 
+                    prefix_string = sc3 + sc2;
+                    return prefix_string;
+                }
+                else
+                {
+                   return bulls_string6;
+                }
+
+                
+                
             }
             catch (Exception)
             {
